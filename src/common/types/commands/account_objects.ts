@@ -1,5 +1,12 @@
 import {CheckLedgerEntry} from '../objects'
 
+export interface GetAccountObjectsOptions {
+  type?: string,
+  ledgerHash?: string,
+  ledgerIndex?: number | ('validated' | 'closed' | 'current'),
+  limit?: number
+}
+
 export interface AccountObjectsRequest {
   account: string,
 
@@ -18,7 +25,9 @@ export interface AccountObjectsRequest {
 
   // (Optional) The sequence number of the ledger to use,
   // or a shortcut string to choose a ledger automatically.
-  ledger_index?: number | ('validated' | 'closed' | 'current')
+  ledger_index?: number | ('validated' | 'closed' | 'current'),
+
+  limit?: number
 }
 
 export interface AccountObjectsResponse {

@@ -92,67 +92,67 @@ function getCollectKeyFromCommand(command: string): string|undefined {
  *
  * Throws if `params` are invalid for `command`.
  */
-function _validateRequest(command: string, params: any): void {
-  switch (command) {
-    case 'account_info':
-      // getSettings sets `signer_lists: true`
-      if (params.signer_lists) {
-        validate.getSettings({
-          address: params.account,
-          options: {
-            ledgerVersion: params.ledger_index
-          }
-        })
-      } else {
-        validate.getAccountInfo({
-          address: params.account,
-          options: {
-            ledgerVersion: params.ledger_index
-          }
-        })
-      }
-      return
-    case 'gateway_balances':
-      validate.getBalanceSheet({
-        address: params.account,
-        options: {
-          excludeAddresses: params.hotwallet,
-          ledgerVersion: params.ledger_index
-        }
-      })
-      return
-    case 'ledger':
-      validate.getLedger({
-        options: {
-          ledgerVersion: params.ledger_index,
-          includeAllData: params.expand,
-          includeTransactions: params.transactions,
-          includeState: params.accounts
-        }
-      })
-      return
-    case 'ledger_entry':
-      // Validate only if `index` is present.
-      // rippled's `ledger_entry` command supports other fields
-      // which are not validated here:
-      // - account_root
-      // - directory
-      // - offer
-      // - ripple_state
-      if (params.index) {
-        validate.getPaymentChannel({
-          id: params.index
-        })
-      }
-      return
-    case 'account_objects':
-    case 'account_offers':
-    case 'book_offers':
-    case 'account_lines':
-    default:
-      // Unrecognized command - anything goes
-      return
-  }
+function _validateRequest(_command: string, _params: any): void {
+  // switch (command) {
+  //   case 'account_info':
+  //     // getSettings sets `signer_lists: true`
+  //     if (params.signer_lists) {
+  //       validate.getSettings({
+  //         address: params.account,
+  //         options: {
+  //           ledgerVersion: params.ledger_index
+  //         }
+  //       })
+  //     } else {
+  //       validate.getAccountInfo({
+  //         address: params.account,
+  //         options: {
+  //           ledgerVersion: params.ledger_index
+  //         }
+  //       })
+  //     }
+  //     return
+  //   case 'gateway_balances':
+  //     validate.getBalanceSheet({
+  //       address: params.account,
+  //       options: {
+  //         excludeAddresses: params.hotwallet,
+  //         ledgerVersion: params.ledger_index
+  //       }
+  //     })
+  //     return
+  //   case 'ledger':
+  //     validate.getLedger({
+  //       options: {
+  //         ledgerVersion: params.ledger_index,
+  //         includeAllData: params.expand,
+  //         includeTransactions: params.transactions,
+  //         includeState: params.accounts
+  //       }
+  //     })
+  //     return
+  //   case 'ledger_entry':
+  //     // Validate only if `index` is present.
+  //     // rippled's `ledger_entry` command supports other fields
+  //     // which are not validated here:
+  //     // - account_root
+  //     // - directory
+  //     // - offer
+  //     // - ripple_state
+  //     if (params.index) {
+  //       validate.getPaymentChannel({
+  //         id: params.index
+  //       })
+  //     }
+  //     return
+  //   case 'account_objects':
+  //   case 'account_offers':
+  //   case 'book_offers':
+  //   case 'account_lines':
+  //   default:
+  //     // Unrecognized command - anything goes
+  //     return
+  // }
 }
 
 // prevent access to non-validated ledger versions
